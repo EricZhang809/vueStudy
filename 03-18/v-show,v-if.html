@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="wrap" v-show='isVisible'>
+			
+		</div>
+		<div id="wrap2" v-if='isVisible'>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="vue.js">
+	</script>
+	<script type="text/javascript">
+		new Vue({
+			
+		}).$mount('#wrap');
+		//$mount挂载的意思也可以指定选择区域,不过使用较少
+		//v-show 和v-if需要配合data 里面的isVisible:			来确定模块是否显示,传的值是布尔值,可以是其他的会进行隐式转换
+		// v-show 和v-if给人的视觉效果是一样的,看上去都是让元素显示和隐藏,
+		// v-show是通过控制元素的display属性实现显示和隐藏的
+		// v-if是通过移除和插入dom元素实现元素的条件渲染
+		// 条件渲染： 是否在文档中
+			//	条件成立	在文档中
+			//	条件不成立 不在文档中
+			
+		// v-if v-else-if 后面可以写个表达式
+		// v-else	后面不写表达式
+		
+		// v-for 用来做列表渲染的
+		//	可以遍历数组,对象,字符串,数字
+	</script>
+</html>
+

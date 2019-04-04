@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="box">
+		<p>我叫{{name+"S"}}</p>
+		<p>今年{{age - 4}}岁</p>
+		<p>{{age % 2 === 0?'偶数':'奇数'}}</p>
+		<p>{{name.toUpperCase()}}</p>
+	</div>
+
+	<div id="wrap" >
+		
+	</div>
+	<script src='node_modules/vue/dist/vue.js'></script>
+
+	<script>
+		var vm = new Vue({
+			el: '#box', // vue接管的区域/范围 
+			// 数据 
+			data: {
+				name: 'peter',
+				age: 11
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>商品管理系统</title>
+	<!-- 引入Bootstrap样式 bootstrap.css-->
+	<link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.css">
+	<script src="jquery.js"></script>
+	<!-- 引入Bootstrap行为 bootstrap.js-->
+	<script src="bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+	<div class="container" id='wrap'>
+
+		<!-- 添加商品的模态框开始 -->
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" ref='modal' id='add-modal'>
+	 	 <div class="modal-dialog" role="document">
+		   	<div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="gridSystemModalLabel">添加商品</h4>
+		      </div>
+		      <div class="modal-body">
+		        	<form>
+				  <div class="form-group">
+				    <label for="title">商品</label>
+				    <input type="text" class="form-control" id="title" placeholder="商品" v-model='title'>
+				  </div>
+				  <div class="form-group">
+				    <label for="price">价格</label>
+				    <input type="text" class="form-control" id="price" placeholder="价格" v-model='price'>
+				  </div>
+				   <div class="form-group">
+				    <label for="stock">库存</label>
+				    <input type="text" class="form-control" id="stock" placeholder="库存" v-model='stock'>
+				  </div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger"
+		         @click='addProduct()'>添加</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<!-- 添加商品的模态框结束 -->
+
+		<button class="btn btn-success" data-target='#add-modal' data-toggle='modal'>
+			<span class="glyphicon glyphicon-plus"></span>
+			添加商品
+		</button>
+
+
+		<table class="table table-hover table-bordered">
+			
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>名称</th>
+					<th>价格</th>
+					<th>库存</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-show='productList.length === 0'>
+					<td colspan="5">暂无更多数据</td>
+				</tr>
+				<tr v-for='product,index in productList'>
+					<td>{{product.id}}</td>
+					<td>{{product.title}}</td>
+					<td>{{product.price}}</td>
+					<td>{{product.stock}}</td>
+					<td>
+						<button data-target='#del-modal' data-toggle='modal' class="btn btn-danger btn-sm" @click='selectIndex(index)'>
+							删除
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+		<!-- 删除商品的模态框开始 -->
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" id='del-modal'>
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h5 class="modal-title" id="exampleModalLabel">确定删除么?</h5>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" @click='removeProduct(index)'>确定</button>
+		        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- 删除商品的模态框结束 -->
+	</div>
+
+	<script src='./vue.js'></script>
+
+	<script>
+		new Vue({
+			el: '#wrap',
+			data: {
+				title: '', 
+				price: '',
+				stock: '',
+				// 商品列表的数组 
+				productList: [],
+
+				index: 1 // 记录当前tr的索引 
+			},
+			methods: {
+				// 添加商品
+				addProduct(){
+					let {title,price,stock} = this;
+					// 1. 数据校验 
+						if(!title) {
+							alert('商品名不能为空');
+							return false;
+						}
+						if(!price) {
+							alert('价格不能为空');
+							return false;
+						}
+						if(!stock) {
+							alert('库存不能为空');
+							return false;
+						}
+						// 2.2 商品名需要是汉字或英文  价格、库存 需要是数字
+						if(!/^([\u4e00-\u9fa5])|([a-z])+$/i.test(title)) {
+							alert('商品名不符合规范,必须是汉字或者英文');
+							return false;
+						}
+
+						if(!/^[1-9]\d*\.?\d*$/.test(price)) {
+							alert('价格不符合规范,必须是数字');
+							return false;
+						}
+						if(!/^\d+$/.test(stock)) {
+							alert('库存不符合规范,必须是大于或等于零的整数');
+							return false;
+						}
+					
+					// 2.添加商品
+					this.productList.push({
+						id: Date.now(),
+						title,
+						price,
+						stock
+					});
+					// 3.关闭模态框 
+
+					// Bootstrap3.3.7     Bootstrap5.x之前 都是依赖jquery
+					$('#add-modal').modal('hide');
+
+					// 4.清空表单控件 
+					this.title = this.price = this.stock = '';
+				},
+				// 删除商品
+				removeProduct(index) {
+					this.productList.splice(index,1);
+					$('#del-modal').modal('hide');
+				},
+				// 选择当前点击那个商品的索引 
+				selectIndex(index) {
+					this.index = index;
+				}
+			}
+		})
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

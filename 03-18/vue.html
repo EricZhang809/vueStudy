@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<h3 v-bind:title="name" v-on:click='fn(5)'>{{name}}</h3>
+		</div>
+		<div id="wrap">
+			
+		</div>
+	</body>
+	<script src="./vue.js"></script>
+	<script type="text/javascript">
+		let vm = new Vue({
+			//vue接管的范围/区域
+			el:'#box',
+			//数据
+			data:{
+				name:'1'
+			},
+			// 	所有的方法定义在methods中
+			methods:{
+				//自定义alert()
+				fn(){
+					this.name*=2;
+				}
+			}
+		})
+//		可以直接用vm.name来访问到数据
+	</script>
+</html>

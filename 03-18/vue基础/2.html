@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div id="box"  @click='fn1'>
+		<h3 :title='a'>{{a}}</h3>
+		<button @click='fn2(3,$event)'>点击+a</button>
+	</div>
+	<script src='node_modules/vue/dist/vue.js'></script>
+	<script>
+		var vm = new Vue({
+			// vue接管的范围
+			el: '#box',
+			// 普通数据 
+			data: {
+				a: 1
+			},
+			// 所有的方法定义在methods中 
+			methods: {
+				fn1() {
+					console.log('fn1');
+				},
+				// 自定义alert
+				fn2(num,ev) {
+					// console.log(ev)
+					ev.stopPropagation();
+					// 原生alert
+					// vm.a++;
+					// this指向vue实例(vm)
+					// alert(this === vm)  true 
+					// this.a += num;
+					console.log('fn2')
+
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		#wrap {
+			background: #aaa;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap" @click='handleClick2'>
+		<!-- <form @submit.prevent='submit'>
+			<input type="submit" @click.stop>
+			
+		</form> -->
+
+		<button @click.stop='handleClick'>click</button>
+	</div>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script >
+		var vm = new Vue({
+			el: '#wrap',
+			methods: {
+				submit() {
+					console.log('submit');
+				},
+				handleClick(){
+					console.log('handleClick');
+				},
+				handleClick2() {
+					console.log('handleClick2');
+				}
+			}
+		});
+
+		console.log(vm);
+
+		
+		
+	</script>
+</body>
+</html>

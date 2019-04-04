@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="div1">
+		<button @click='change()'>change topic</button>
+		<component :is='cmpName'></component>
+	</div>
+	<script src="../vue.js"></script>
+	<script>
+		const Cmp1 = {
+			template: '<div>组件1</div>'
+		};
+		const Cmp2 = {
+			template: '<div>组件2</div>'
+		};
+		const Cmp3 = {
+			template: '<div>组件3</div>'
+		};
+
+		new Vue({
+			el: '#div1',
+			
+			data: {
+				cmpName: 'cmp1'
+			},
+			components: {
+				Cmp1,
+				Cmp2,
+				Cmp3
+			},
+			methods: {
+				change() {
+					this.cmpName = 'cmp2';
+				}
+			}
+
+		})
+	</script>
+</body>
+</html>

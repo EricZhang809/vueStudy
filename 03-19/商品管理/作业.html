@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style >
+		.box {
+			width: 100px;
+			height: 100px;
+			background: #f00;
+		}
+		.box.active {
+			background: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<button @click='changeDivBgColor'>改变div的背景色</button>
+		<!-- <div class="box" :class='hasActive?"active":""'>
+			
+		</div> -->
+
+		<div class="box" :style='{background: hasActive? "#0f0":"#f00"}'>
+			
+		</div>
+	</div>
+
+	<script src='./vue.js'></script>
+	<script>
+		new Vue({
+			el: '#wrap',
+			data: {
+				// 数据驱动  
+				hasActive: false
+			},
+			methods: {
+				changeDivBgColor() {
+					// 
+					this.hasActive = !this.hasActive
+				}
+			}
+		})
+	</script>
+</body>
+</html>

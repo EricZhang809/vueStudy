@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box" @click='fn()'>
+			{{name}}
+		</div>
+		<div id="obj">
+			<p>{{name}}</p>
+			<p>{{age}}</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="vue.js">
+	</script>
+	<script type="text/javascript">
+		let arr = [1,2,3,4,5];
+		let obj= {name:'mary',age:21}
+		let vm = new Vue({
+			el:'#box',
+			data:{
+				name:arr
+			},
+			methods:{
+				fn(){
+					this.name = arr.reduce((prep,curr)=>{return prep+curr;});
+				}
+			}
+		})
+		let vm1 = new Vue({
+			el:'#obj',
+			data:{
+				name:'',
+				age:''
+			}
+		})
+		for(k in obj){
+			console.log(obj[k])
+			vm1[k] = obj[k];
+		}
+	</script>
+</html>

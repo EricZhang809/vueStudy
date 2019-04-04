@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="wrap">
+		{{ arr.reduce((f,n) => f + n) }}
+		<p>{{obj}}</p>
+		<p>{{obj.name}}</p>
+		<p>{{obj.age}}</p>
+	</div>
+	<script src="../vue.js"></script>
+	<script >
+		var vm = new Vue({
+			el: '#wrap',
+			data: {
+				arr: [1,2,3,4,5],
+				obj: {
+					name: 'mary',
+					age: 21
+				}
+			}
+		});
+
+		document.onclick = function() {
+			vm.obj.name = 'peter';
+			vm.obj.age = 18;
+		};
+
+
+		
+	</script>
+</body>
+</html>

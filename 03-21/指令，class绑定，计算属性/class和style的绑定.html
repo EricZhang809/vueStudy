@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style >
+		.box {
+			width: 200px;
+			height: 200px;
+			background: #ddd;
+		}
+		.box.red {
+			background: red;
+		}
+		.box.green {
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">
+		<button @click='changeBg()'>切换div的背景颜色</button>
+		<div class="box" :class='isRed ? "red":"green"'>
+			
+		</div>
+	</div>
+	<script src="./vue.js"></script>
+	<script>
+		new Vue({
+			el: '#div1',
+			data: {
+				isRed: true
+			},
+
+			methods: {
+				changeBg() {
+					this.isRed = !this.isRed;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

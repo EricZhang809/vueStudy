@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		ol,ul{
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul>
+			<li v-for='item,index in navs' :key='index'>{{item}} 
+
+			=== {{index}}</li>
+		</ul>
+		<dl>
+			<dd v-for='s,index in str'>{{s}}==={{index}}</dd>
+		</dl>
+		<dl>
+			<dd v-for='n,index in num'>{{n}}=={{index}}</dd>
+		</dl>
+
+
+		<ol>
+			<li v-for='value,key,index in obj' :key='key'>
+				{{key}} === {{value}} === {{index}}
+			</li>
+		</ol>
+		
+	</div>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el: '#wrap',
+			data: {
+				navs: ['首页','新闻','科技','体育','娱乐'],
+				obj: {
+					c: 3,
+					a: 1,
+					b: 2
+				
+				},
+				str: 'helloworld',
+				num: 7
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>商品管理系统</title>
+	<style>
+		.wrap {
+			width: 800px;
+			margin: 50px auto 0;
+		}
+		.wrap form {
+			margin-bottom: 20px;
+		}
+		.wrap table {
+			text-align: center;
+		}
+		.wrap table tr {
+			height: 35px;
+		}
+		.wrap table tbody tr:hover {
+			background: #eee;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<form @submit.prevent.stop="submit()">
+			<input type="text" name="title" placeholder="名称" ref='title'>
+			<input type="number" name="price" min="0" placeholder="价格" ref='price'>
+			<input type="number" name="stock" min="0" placeholder="库存" ref='num'>
+			<input type="submit" value="添加" @click.stop.prevent='add()'>
+		</form>
+		<table border='1' width='800' cellspacing="0">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>名称</th>
+					<th>价格</th>
+					<th>库存</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-if='items.length==0'>
+					<td colspan="5">暂无更多数据</td>
+				</tr>
+				<tr v-for="item,index in items">
+					<td>{{index}}</td>
+					<td>{{item.title}}</td>
+					<td>{{item.price}}</td>
+					<td>{{item.num}}</td>
+					<td>删除</td>
+				</tr>
+				<!--
+				<tr>
+					<td>100001</td>
+					<td>运动鞋</td>
+					<td>298¥</td>
+					<td>367</td>
+					<td>删除</td>
+				</tr>
+				<tr>
+					<td>100002</td>
+					<td>牛仔裤</td>
+					<td>249¥</td>
+					<td>43</td>
+					<td>删除</td>
+				</tr>
+				<tr>
+					<td>100003</td>
+					<td>衬衣</td>
+					<td>139¥</td>
+					<td>114</td>
+					<td>删除</td>
+				</tr>
+			    -->
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript" src="../vue.js">
+	</script>
+	<script type="text/javascript">
+		new Vue({
+			el:'.wrap',
+			data:{
+				items:[],
+			},
+			methods:{
+				submit(){},
+				add(){
+					if(this.$refs.title.value&&this.$refs.num.value&&this.$refs.price.value){
+						this.items.push({
+							'title':this.$refs.title.value,
+							'price': this.$refs.price.value,
+							'num': this.$refs.num.value
+						})
+					}
+					console.log(this.items)
+				}
+			}
+		})
+	</script>
+</body>
+</html>

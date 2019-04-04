@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="div1">
+		<button @click='fn()'>create|destroy</button>
+		<keep-alive>
+			<goudan v-if='isExist'></goudan>		
+		</keep-alive>
+		<!-- <goudan v-if='isExist'></goudan>		 -->
+	</div>
+	<script src="../vue.js"></script>
+	<script >
+		const Goudan = {
+			template: `<div>我是狗蛋组件</div>`,
+			beforeCreate() {
+				console.log('狗蛋组件创建前')
+			},
+			created() {
+				console.log('狗蛋组件创建后')
+			},
+			beforeMount() {
+				console.log('狗蛋组件挂载前')
+			},
+			mounted() {
+				console.log('狗蛋组件挂载后')
+			},
+			beforeDestroy() {
+				console.log('狗蛋组件销毁前')
+			},
+			destroyed() {
+				console.log('狗蛋组件销毁后')
+			},
+			// 组件激活时触发
+			activated() {
+				console.log('组件激活')
+			},
+			// 组件停用时触发
+			deactivated() {
+				console.log('组件停用')
+			}
+		};
+
+
+		new Vue({
+			el: '#div1',
+			data: {
+				isExist: true
+			},
+			methods: {
+				fn() {
+					this.isExist = !this.isExist;
+				}
+			},
+			components: {
+				Goudan
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		#wrap {
+			background: #aaa;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<input type="submit">
+	</form>
+	<script>
+		let oForm = document.querySelector('form');
+		oForm.onsubmit = function(ev) {
+			ev.preventDefault();
+			console.log(1);
+			// return false;
+		}
+	</script>
+	<div id="wrap" @click='handleClick2'>
+		<form @submit='submit($event)'>
+			<input type="submit">
+			<button @click='handleClick'>click</button>
+		</form>
+	</div>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script >
+
+		var vm = new Vue({
+			el: '#wrap',
+			methods: {
+				submit(ev) {
+					// ev.preventDefault();
+					return false;
+				},
+				handleClick(ev) {
+					ev.stopPropagation();
+					console.log('button click');
+				},
+				handleClick2() {
+					console.log('wrap click');
+				}
+
+			}
+		});
+
+		console.log(vm);
+
+		
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="wrap">
+		<div class="box" v-for='a,index in "abcd"' :key='index'>
+			<p>computed: {{ allName }}</p>
+			<p>methods: {{ allName2() }}</p>
+			<p>watch: {{ fullName }}</p>
+		</div>
+	
+	</div>
+	<script src="../vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el: '#wrap',
+			data: {
+				firstName: 'Kobe', // 名
+				lastName: 'Bryant',// 姓
+				fullName: 'Kobe Bryant'// 全名
+			},
+			computed: {
+				allName() {
+					console.log('我是计算属性')
+					return this.firstName + ' ' + this.lastName;
+				}
+			},
+
+			methods: {
+				allName2() {
+					console.log('我是普通属性')
+					return this.firstName + ' ' + this.lastName;
+				}
+			},
+
+			watch: {
+				firstName(newVal) {
+					setTimeout(()=> {
+						 this.fullName = newVal + ' ' + this.lastName;
+					},2000);
+				},
+				lastName(newVal) {
+					console.log('我是监听属性')
+ 					this.fullName = this.firstName + ' ' +newVal;
+				}
+			}
+		});
+
+
+
+		/*
+			v-for中
+				循环了4次 
+
+				computed:   调用了1次，有缓存
+
+				methods:    调用了4次,每调用一次,都会执行一次函数体,不会缓存
+
+	
+
+				watch:     初次渲染不会触发
+
+
+
+		*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

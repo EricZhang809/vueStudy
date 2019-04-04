@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style >
+		.inner {
+			width: 200px;
+			height: 200px;
+			background: #f00;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<button @click='toggle'>toggle</button>
+		<div class="inner" v-show='isVisible'>
+			
+		</div>
+		<div class="inner" v-if='isVisible'>
+			
+		</div>
+	</div>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el: '#wrap',
+			data: {
+				isVisible: true
+			},
+			methods: {
+				toggle() {
+					// this === vm
+					vm.isVisible = !vm.isVisible;
+				}
+			}
+		})
+
+	</script>
+</body>	
+</html>
